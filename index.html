@@ -18,26 +18,26 @@
 					</div>
 					<span>登录</span>
 				</dt>
-				<dd class="active" ng-repeat="list in lists">
+				<dd ng-class="{active:collapsed}" ng-repeat="list in lists" ng-click="toggle()">
 					<a href="{{list.link}}" class="{{list.icon}}">
 						<span>{{list.text}}</span>
 					</a>
 				</dd>
 			</dl>
 			<div class="extra">
-				<!-- <a href="javascript:;" class="icon-image">夜晚</a>
-				<a href="javascript:;" class="icon-download">离线</a> -->
+				<a href="javascript:;" class="icon-image">夜晚</a>
+				<a href="javascript:;" class="icon-download">离线</a>
 			</div>
 		</div>
 		<div class="container">
 			<!-- 头部 -->
 			<div ng-class="{header:true,collapse:collapsed}">
 				<a href="javascript:;" class="menu icon-menu" ng-click="toggle()"></a>
-				<h2>今日一刻</h2>
+				<h2>{{title}}</h2>
 				<a href="javascript:;" class="search icon-search"></a>
 			</div>
 			<!-- 主体 -->
-			<div ng-class="{body:true,collapse:collapsed}" ng-view>
+			<div ng-class="{body:true,collapse:collapsed}" ng-view >
 
 			</div>
 		</div>

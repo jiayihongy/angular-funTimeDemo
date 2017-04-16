@@ -9,21 +9,54 @@ angular.module('controls',[])
         {link:'#/settings',icon:'icon-cog',text:'设置'}
     ]
 }])
-.controller('TodayCtrl', ['$scope', function($scope){
-        $scope.dd = '今天多少卡号'
+.controller('TodayCtrl', ['$scope','$http','$filter','$rootScope', function ($scope,$http,$filter,$rootScope){
+
+        $rootScope.title = '今日一刻';
+        $scope.today = $filter('date')(new Date(),'yyyy-MM-dd');
+        $http({
+            url:'./api/today.php',
+            method:'get',
+            params:{today:$scope.today}
+        })
+        .success(function (info){
+           $scope.posts = info.posts;
+        })
+
 }])
-.controller('OlderCtrl', ['$scope', function($scope){
-        $scope.dd = '今天多少卡号'
+.controller('OlderCtrl', ['$scope','$http','$filter','$rootScope', function ($scope,$http,$filter,$rootScope){
+
+        $rootScope.title = '昨日重现';
+        $scope.today = $filter('date')(new Date()-24*60*60*1000,'yyyy-MM-dd');
+        $http({
+            url:'./api/today.php',
+            method:'get',
+            params:{today:$scope.today}
+        })
+        .success(function (info){
+           $scope.posts = info.posts;
+
+        })
+
 }])
-.controller('AuthorCtrl', ['$scope', function($scope){
-        $scope.dd = '今天多少卡号'
+.controller('AuthorCtrl', ['$scope','$http','$filter','$rootScope', function ($scope,$http,$filter,$rootScope){
+
+        $rootScope.title = '热门作者';
+        $http({
+            url:'./api/author.php',
+            method:'get'
+        })
+        .success(function (info){
+            $scope.authors = info.authors;
+
+        })
+
 }])
-.controller('CategoryCtrl', ['$scope', function($scope){
-        $scope.dd = '今天多少卡号'
+.controller('CategoryCtrl', ['$scope', function ($scope){
+
 }])
-.controller('FavouriteCtrl', ['$scope', function($scope){
-        $scope.dd = '今天多少卡号'
+.controller('FavouriteCtrl', ['$scope', function ($scope){
+
 }])
-.controller('SettingsCtrl', ['$scope', function($scope){
-        $scope.dd = '今天多少卡号'
+.controller('SettingsCtrl', ['$scope', function ($scope){
+
 }])
